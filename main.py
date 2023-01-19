@@ -71,8 +71,10 @@ async def on_ready():
 
 @bot.event
 async def on_message(message):
-    if message.content != "":
-        await message.channel.send("2")
+    if message.author == bot.user:
         return
+    if message.content != "":
+        await message.channel.send(get_response(message.content))
+    await bot.process_commands(message)
 
 bot.run("MTA2NTY1MDMzMDU5Mjg3ODcyNA.GTWMfV.zxlQ7zPKZCLnDF4qIsgzjsvF74jZJmq1bb3lkA")
