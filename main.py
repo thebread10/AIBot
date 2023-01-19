@@ -39,7 +39,7 @@ def check_all_messages(message):
     # Responses -------------------------------------------------------------------------------------------------------
     response('Hello!', dataset.hello, single_response=True)
     response('See you!', dataset.bye, single_response=True)
-    response('I\'m doing fine, and you?', dataset.how_asking, required_words=['how'])
+    response('I\'m doing fine, and you?', dataset.how_asking, required_words=['how', 'hru'])
     response('You\'re welcome!', dataset.thanks, single_response=True)
     
     # Longer responses
