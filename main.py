@@ -4,7 +4,7 @@ import dataset as dataset
 import discord
 from discord.ext import commands
 
-bot = commands.Bot(command_prefix = '-', intents = discord.Intents.all())
+bot = commands.Bot(intents = discord.Intents.all())
 
 def message_probability(user_message, recognised_words, single_response=False, required_words=[]):
     message_certainty = 0
@@ -71,7 +71,8 @@ async def on_ready():
 
 @bot.event
 async def on_message(message):
-    await message.channel.send(get_response(message.content))
-    return
+    if message.content != null:
+        await message.channel.send(get_response(message.content))
+        return
 
 bot.run("MTA2NTY1MDMzMDU5Mjg3ODcyNA.GTWMfV.zxlQ7zPKZCLnDF4qIsgzjsvF74jZJmq1bb3lkA")
