@@ -2,6 +2,9 @@ import re
 import long_responses as long
 import discord.py
 import dataset
+from discord.ext import commands
+
+bot = commands.Bot(command_prefix = '-')
 
 def message_probability(user_message, recognised_words, single_response=False, required_words=[]):
     message_certainty = 0
@@ -38,7 +41,7 @@ def check_all_messages(message):
 
     # Responses -------------------------------------------------------------------------------------------------------
     response('Hello!', dataset.hello, single_response=True)
-    response('See you!', dataset.bye, single_response=True)
+    response('See you!', dataset.goodbye, single_response=True)
     response('I\'m doing fine, and you?', dataset.how_asking, required_words=['how', 'hru'])
     response('You\'re welcome!', dataset.thanks, single_response=True)
     
@@ -59,7 +62,17 @@ def get_response(user_input):
     response = check_all_messages(split_message)
     return response
 
+@bot.event
+async def on_ready():
+    print('Logged in as')
+    print(bot.user.name)
+    print(bot.user.id)
+    print('------')
 
-# Testing the response system
-while True:
-    print('Bot: ' + get_response(input('You: ')))
+@bot.event
+async def on_message(message):
+    if message.channel.id == :
+        await message.channel.send(get_response(message))
+
+
+bot.run("MTA2NTY1MDMzMDU5Mjg3ODcyNA.GTWMfV.zxlQ7zPKZCLnDF4qIsgzjsvF74jZJmq1bb3lkA")
