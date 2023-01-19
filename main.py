@@ -1,6 +1,7 @@
 import re
 import long_responses as long
 import discord.py
+import dataset
 
 def message_probability(user_message, recognised_words, single_response=False, required_words=[]):
     message_certainty = 0
@@ -36,12 +37,11 @@ def check_all_messages(message):
         highest_prob_list[bot_response] = message_probability(message, list_of_words, single_response, required_words)
 
     # Responses -------------------------------------------------------------------------------------------------------
-    response('Hello!', ['hello', 'hi', 'hey', 'sup', 'heyo'], single_response=True)
-    response('See you!', ['bye', 'goodbye'], single_response=True)
-    response('I\'m doing fine, and you?', ['how', 'are', 'you', 'doing'], required_words=['how'])
-    response('You\'re welcome!', ['thank', 'thanks'], single_response=True)
-    response('Thank you!', ['i', 'love', 'code', 'palace'], required_words=['code', 'palace'])
-
+    response('Hello!', dataset.hello, single_response=True)
+    response('See you!', dataset.bye, single_response=True)
+    response('I\'m doing fine, and you?', dataset.how_asking, required_words=['how'])
+    response('You\'re welcome!', dataset.thanks, single_response=True)
+    
     # Longer responses
     response(long.R_ADVICE, ['give', 'advice'], required_words=['advice'])
     response(long.R_EATING, ['what', 'you', 'eat'], required_words=['you', 'eat'])
