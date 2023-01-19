@@ -72,7 +72,7 @@ async def on_ready():
 @bot.event
 async def on_message(message):
     if message.content != "":
-        print(1)
+        await message.channel.send("2")
         return
 
 bot.run("MTA2NTY1MDMzMDU5Mjg3ODcyNA.GTWMfV.zxlQ7zPKZCLnDF4qIsgzjsvF74jZJmq1bb3lkA")
