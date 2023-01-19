@@ -52,7 +52,7 @@ def check_all_messages(message):
     
     # Longer responses
     response(long.R_ADVICE, ['give', 'advice'], required_words=['advice'])
-    response(long.R_EATING, ['what', 'you', 'eat', 'u'], required_words=['you', 'u', 'eat'])
+    response(long.R_EATING, ['what', 'do', 'u' , 'you', 'eat'], required_words=['you', 'u', 'eat'])
 
     best_match = max(highest_prob_list, key=highest_prob_list.get)
     # print(highest_prob_list)
