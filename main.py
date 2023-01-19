@@ -51,7 +51,8 @@ def check_all_messages(message):
     response('Oh! interesting ?', dataset.routine, single_response=True)
     response('Talking with you, ig? wbu', dataset.ask, required_words=["what", "doing"])
     response('Talking with you, ig? wbu', dataset.ask, required_words=["what", "upto"])
-    
+    response('Oh what is it, is it interesting?', dataset.tasks, single_response=True)
+
     # Longer responses
     response(long.R_ADVICE, ['give', 'advice'], required_words=['advice'])
     response(long.R_EATING, ['what', 'do', 'you', 'eat'], required_words=['you', 'eat'])
