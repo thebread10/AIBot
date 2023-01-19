@@ -7,3 +7,4 @@ grateful = ['you', 'are', 'a', 'wonderful', 'beautiful', 'cute', 'awesome', 'bot
 reply = ['fine', 'i\'m', 'im']
 routine = ['nothing', 'i', 'did', 'this']
 ask = ['what', 'are', 'you', 'u', 'upto', 'doing']
+tasks = ['nothing', 'doing', 'my', 'work', 'task', 'thing']
