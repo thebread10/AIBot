@@ -1,6 +1,5 @@
 import re
 import long_responses as long
-import discord.py
 import dataset
 from discord.ext import commands
 
