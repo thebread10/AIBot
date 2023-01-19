@@ -1,4 +1,6 @@
 hello = ['hello', 'hi', 'hey', 'sup', 'heyo', 'howdy']
 thanks = ['thanks', 'you', 'thank']
-how_asking = ['how', 'are', 'you']
+how_asking = ['how', 'hru', 'are', 'you']
 goodbye = ['goodbye', 'bye', 'see', 'you', 'cya', 'farewell']
+who_asking = ['who', 'what', 'are', 'you']
+grateful = ['you', 'are', 'a', 'wonderful', 'beautiful', 'cute', 'awesome', 'bot']
