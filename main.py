@@ -1,9 +1,10 @@
 import re
 import long_responses as long
 import dataset as dataset
+import discord
 from discord.ext import commands
 
-bot = commands.Bot(command_prefix = '-')
+bot = commands.Bot(command_prefix = '-', intents = discord.Intents.all())
 
 def message_probability(user_message, recognised_words, single_response=False, required_words=[]):
     message_certainty = 0
