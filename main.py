@@ -49,7 +49,8 @@ def check_all_messages(message):
     response('Aww! Thanks', dataset.grateful, single_response=True)
     response('Glad to hear. So what did you do today?', dataset.reply, single_response=True)
     response('Oh! interesting ?', dataset.routine, single_response=True)
-    response('Talking with you, ig?', dataset.ask, required_words=["what", "upto", "doing"])
+    response('Talking with you, ig? wbu', dataset.ask, required_words=["what", "doing"])
+    response('Talking with you, ig? wbu', dataset.ask, required_words=["what", "upto"])
     
     # Longer responses
     response(long.R_ADVICE, ['give', 'advice'], required_words=['advice'])
