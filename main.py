@@ -71,7 +71,7 @@ async def on_ready():
 
 @bot.event
 async def on_message(message):
-    if message.content != null:
+    if message.content != "":
         await message.channel.send(get_response(message.content))
         return
 
