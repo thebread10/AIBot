@@ -1,6 +1,6 @@
 import re
 import long_responses as long
-import dataset
+import dataset as dataset
 from discord.ext import commands
 
 bot = commands.Bot(command_prefix = '-')
