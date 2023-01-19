@@ -58,7 +58,7 @@ def check_all_messages(message):
 
 # Used to get the response
 def get_response(user_input):
-    split_message = re.split(r'\s+|[,;?!.-]\s*', user_input.lower())
+    split_message = user_input.lower()
     response = check_all_messages(split_message)
     return response
 
@@ -72,7 +72,7 @@ async def on_ready():
 @bot.event
 async def on_message(message):
     if message.content != "":
-        await message.channel.send(get_response(message.content))
+        print(1)
         return
 
 bot.run("MTA2NTY1MDMzMDU5Mjg3ODcyNA.GTWMfV.zxlQ7zPKZCLnDF4qIsgzjsvF74jZJmq1bb3lkA")
