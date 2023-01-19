@@ -44,7 +44,7 @@ def check_all_messages(message):
     response('See you!', dataset.goodbye, single_response=True)
     response('I\'m doing fine, and you?', dataset.how_asking, required_words=['how'])
     response('I\'m doing fine, and you?', ['hru', 'hry'], single_response=True)
-    response('I\'m a lifeless human-type with only humanoid brain which is created artificially - A bot', dataset.who_asking, single_response=True)
+    response('I\'m a lifeless human-type with only humanoid brain which is created artificially - A bot', dataset.who_asking, required_words=["what", "who"])
     response('You\'re welcome!', dataset.thanks, single_response=True)
     response('Aww! Thanks', dataset.grateful, single_response=True)
     response('Glad to hear. So what did you do today?', dataset.reply, single_response=True)
