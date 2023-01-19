@@ -71,7 +71,8 @@ async def on_ready():
 
 @bot.event
 async def on_message(message):
-    await message.channel.send(get_response(message.content))
-
+    if message.channel.id == 1065651049689534497:
+        await message.channel.send(get_response(message.content))
+        return
 
 bot.run("MTA2NTY1MDMzMDU5Mjg3ODcyNA.GTWMfV.zxlQ7zPKZCLnDF4qIsgzjsvF74jZJmq1bb3lkA")
