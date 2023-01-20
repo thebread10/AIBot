@@ -1,5 +1,5 @@
 hello = ['hello', 'hi', 'hey', 'whatsup', 'ssup', 'sup', 'heyo', 'howdy']
-thanks = ['thanks', 'you', 'u', 'thank', 'thanku']
+thanks = ['thanks', 'you', 'u', 'thank', 'thnx', 'thankq', 'thnq', 'thanku']
 how_asking = ['how', 'hru', 'are', 'r', 'you', 'u']
 goodbye = ['goodbye', 'bye', 'see', 'you', 'cya', 'u', 'farewell']
 who_asking = ['who', 'what', 'are', 'you', 'u']
