@@ -5,6 +5,7 @@ from transformers import AutoModelForCausalLM AutoTokenizer GPT2Tokenizer, GPT2L
 from discord.ext import commands
 
 bot = commands.Bot(command_prefix = "-", intents = discord.Intents.all())
+dialog_hx = []
 
 tokenizer = AutoTokenizer.from_pretrained("af1tang/personaGPT")
 model = AutoModelForCausalLM.from_pretrained("af1tang/personaGPT")
@@ -55,6 +56,8 @@ async def on_message(message):
     if message.author == bot.user:
         return
     if message.content != "":
+        user_inp = tokenizer.encode(message + tokenizer.eos_token)
+        dialog_hx.append(user_inp)
         bot_input_ids = to_var([flatten(dialog_hx)]).long()
         msg = generate_next(bot_input_ids)
         await message.channel.send(tokenizer.decode(msg, skip_special_tokens=True))
