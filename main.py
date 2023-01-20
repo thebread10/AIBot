@@ -1,48 +1,14 @@
 import re
 import torch
 import discord
-from transformers import AutoModelForCausalLM, AutoTokenizer, GPT2Tokenizer, GPT2LMHeadModel
+from transformers import AutoModelForCausalLM, AutoTokenizer
 from discord.ext import commands
 
 bot = commands.Bot(command_prefix = "-", intents = discord.Intents.all())
 dialog_hx = []
 
-tokenizer = AutoTokenizer.from_pretrained("af1tang/personaGPT")
-model = AutoModelForCausalLM.from_pretrained("af1tang/personaGPT")
-
-if torch.cuda.is_available():
-    model = model.cuda
-
-flatten = lambda l: [item for sublist in l for item in sublist]
-
-def to_data(x):
-    if torch.cuda.is_available():
-        x = x.cpu()
-    return x.data.numpy()
-
-def to_var(x):
-    if not torch.is_tensor(x):
-        x = torch.Tensor(x)
-    if torch.cuda.is_available():
-        x = x.cuda()
-    return x
-
-def display_dialog_history(dialog_hx):
-    for j, line in enumerate(dialog_hx):
-        msg = tokenizer.decode(line)
-        if j %2 == 0:
-            print(">> User: "+ msg)
-        else:
-            print("Bot: "+msg)
-            print()
-
-def generate_next(bot_input_ids, do_sample=True, top_k=10, top_p=.92,
-                  max_length=1000, pad_token=tokenizer.eos_token_id):
-    full_msg = model.generate(bot_input_ids, do_sample=True,
-                                              top_k=top_k, top_p=top_p, 
-                                              max_length=max_length, pad_token_id=tokenizer.eos_token_id)
-    msg = to_data(full_msg.detach()[0])[bot_input_ids.shape[-1]:]
-    return msg
+tokenizer = AutoTokenizer.from_pretrained("deepparag/Aeona")
+model = AutoModelWithLMHead.from_pretrained("deepparag/Aeona")
 
 @bot.event
 async def on_ready():
@@ -56,11 +22,18 @@ async def on_message(message):
     if message.author == bot.user:
         return
     if message.content != "":
-        user_inp = tokenizer.encode(message + tokenizer.eos_token)
-        dialog_hx.append(user_inp)
-        bot_input_ids = to_var([flatten(dialog_hx)]).long()
-        msg = generate_next(bot_input_ids)
-        await message.channel.send(tokenizer.decode(msg, skip_special_tokens=True))
+        new_user_input_ids = tokenizer.encode(message + tokenizer.eos_token, return_tensors='pt')
+        bot_input_ids = torch.cat([chat_history_ids, new_user_input_ids], dim=-1) if step > 0 else new_user_input_ids
+        chat_history_ids = model.generate(
+          bot_input_ids, max_length=200,
+          pad_token_id=tokenizer.eos_token_id,  
+          no_repeat_ngram_size=4,       
+          do_sample=True, 
+          top_k=100, 
+          top_p=0.7,
+          temperature=0.8
+        )
+        await message.channel.send(tokenizer.decode(chat_history_ids[:, bot_input_ids.shape[-1]:][0], skip_special_tokens=True))
     await bot.process_commands(message)
 
 bot.run("MTA2NTY1MDMzMDU5Mjg3ODcyNA.GTWMfV.zxlQ7zPKZCLnDF4qIsgzjsvF74jZJmq1bb3lkA")
