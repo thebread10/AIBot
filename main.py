@@ -1,7 +1,7 @@
 import re
 import torch
 import discord
-from transformers import GPT2Tokenizer, GPT2LMHeadModel
+from transformers import AutoModelForCausalLM AutoTokenizer GPT2Tokenizer, GPT2LMHeadModel
 from discord.ext import commands
 
 bot = commands.Bot(command_prefix = "-", intents = discord.Intents.all())
