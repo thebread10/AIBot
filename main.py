@@ -38,7 +38,7 @@ def check_all_messages(message):
     highest_prob_list = {}
 
     # Simplifies response creation / adds it to the dict
-    def response(bot_response, list_of_words, single_response=False, required_words=[]):
+    def response(bot_response, list_of_words, single_response=False, required_words=[], negative_response=False, reply=False):
         nonlocal highest_prob_list
         highest_prob_list[bot_response] = message_probability(message, list_of_words, single_response, required_words, negative_response, reply)
 
