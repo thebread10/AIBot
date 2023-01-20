@@ -5,7 +5,6 @@ from transformers import AutoModelWithLMHead, AutoTokenizer
 from discord.ext import commands
 
 bot = commands.Bot(command_prefix = "-", intents = discord.Intents.all())
-dialog_hx = []
 
 tokenizer = AutoTokenizer.from_pretrained("deepparag/Aeona")
 model = AutoModelWithLMHead.from_pretrained("deepparag/Aeona")
