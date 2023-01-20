@@ -1,12 +1,13 @@
 import re
 import long_responses as long
+import negative as negative 
 import dataset as dataset
 import discord
 from discord.ext import commands
 
 bot = commands.Bot(command_prefix = "-", intents = discord.Intents.all())
 
-def message_probability(user_message, recognised_words, single_response=False, required_words=[]):
+def message_probability(user_message, recognised_words, single_response=False, required_words=[], negative_response=False, reply=False):
     message_certainty = 0
     has_required_words = True
 
@@ -27,6 +28,8 @@ def message_probability(user_message, recognised_words, single_response=False, r
     # Must either have the required words, or be a single response
     if has_required_words or single_response:
         return int(percentage * 100)
+    elif reply:
+        return -1
     else:
         return 0
 
@@ -37,7 +40,7 @@ def check_all_messages(message):
     # Simplifies response creation / adds it to the dict
     def response(bot_response, list_of_words, single_response=False, required_words=[]):
         nonlocal highest_prob_list
-        highest_prob_list[bot_response] = message_probability(message, list_of_words, single_response, required_words)
+        highest_prob_list[bot_response] = message_probability(message, list_of_words, single_response, required_words, negative_response, reply)
 
     # Responses -------------------------------------------------------------------------------------------------------
     response('Hello!', dataset.hello, single_response=True)
@@ -51,14 +54,15 @@ def check_all_messages(message):
     response('Oh! interesting ?', dataset.routine, single_response=True)
     response('Talking with you, ig? wbu', dataset.ask, required_words=["what", "doing"])
     response('Talking with you, ig? wbu', dataset.ask, required_words=["what", "upto"])
-    response('Oh what is it, is it interesting?', dataset.tasks, single_response=True)
-    response('Oh I see', ['yes', 'no'], single_response=True)
+    response('Oh what is it, is it interesting?', dataset.tasks, single_response=True, reply=True)
 
     # Longer responses
     response(long.R_ADVICE, ['give', 'advice'], required_words=['advice'])
     response(long.R_EATING, ['what', 'do', 'you', 'eat'], required_words=['you', 'eat'])
 
     best_match = max(highest_prob_list, key=highest_prob_list.get)
+    if highest_prob_list[best_match] == -1:
+        best_match = "Oh I see"
     # print(highest_prob_list)
     # print(f'Best match = {best_match} | Score: {highest_prob_list[best_match]}')
 
