@@ -30,7 +30,7 @@ async def on_message(message):
 		"generated_responses": "",
 		"text": message.content
             }
-        })
+        }))
     await bot.process_commands(message)
 
 bot.run("MTA2NTY1MDMzMDU5Mjg3ODcyNA.GTWMfV.zxlQ7zPKZCLnDF4qIsgzjsvF74jZJmq1bb3lkA")
