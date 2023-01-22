@@ -5,7 +5,7 @@ from discord.ext import commands
 
 bot = commands.Bot(command_prefix = "-", intents = discord.Intents.all())
 
-API_URL = "https://api-inference.huggingface.co/models/deepparag/Aeona"
+API_URL = "https://api-inference.huggingface.co/models/facebook/blenderbot-400M-distill"
 headers = {"Authorization": f"Bearer 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"}
 
 def query(payload):
