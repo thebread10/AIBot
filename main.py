@@ -6,7 +6,7 @@ from discord.ext import commands
 
 bot = commands.Bot(command_prefix = "-", intents = discord.Intents.all())
 
-API_URL = f"https://api-inference.huggingface.co/models/{os.getenv("MODEL_ID")}"
+API_URL = f"https://api-inference.huggingface.co/models/{os.getenv('MODEL_ID')}"
 headers = {"Authorization": f"Bearer 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"}
 data = {
     "guild_id": [],
