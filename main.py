@@ -25,9 +25,9 @@ async def on_message(message):
         return
     if message.content != "":
         await message.channel.send(query({
-	    "inputs": {
-		"past_user_inputs": "",
-		"generated_responses": "",
+	    "conversation": {
+		"past_user_inputs": [],
+		"generated_responses": [],
 		"text": message.content
             }
         }))
