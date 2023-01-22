@@ -4,12 +4,14 @@ import requests
 from discord.ext import commands
 
 bot = commands.Bot(command_prefix = "-", intents = discord.Intents.all())
+
 API_URL = "https://api-inference.huggingface.co/models/deepparag/Aeona"
 headers = {"Authorization": f"Bearer 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"}
 
 def query(payload):
     data = json.dumps(payload)
     response = requests.request("POST", API_URL, headers=headers, data=data)
+    print(json.loads(response.content.decode("utf-8")))
     return json.loads(response.content.decode("utf-8"))
 
 @bot.event
