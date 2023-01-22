@@ -19,12 +19,12 @@ def query(payload):
 @bot.command()
 async def set_channel(ctx):
     isGuild = True
-    for i in data.guild_id:
-        if data.guild_id == ctx.guild.id:
+    for i in data['guild_id']:
+        if data['guild_id'] == ctx.guild.id:
             isGuild = False
     if isGuild == True:
-        data.guild_id.append(ctx.guild.id)
-        data.channel_id.append(ctx.channel.id)
+        data['guild_id'].append(ctx.guild.id)
+        data['channel_id'].append(ctx.channel.id)
         await ctx.send("Channel Set Successfully, Enjoy")
     else:
         await ctx.send("Guild already registered")
@@ -56,7 +56,7 @@ async def on_message(message):
             }
         }))
     else:
-        await message.channel.send("Set Channels")
+        await message.channel.send("No channels set")
     await bot.process_commands(message)
 
 bot.run("MTA2NTY1MDMzMDU5Mjg3ODcyNA.GTWMfV.zxlQ7zPKZCLnDF4qIsgzjsvF74jZJmq1bb3lkA")
