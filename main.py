@@ -25,9 +25,9 @@ async def set_channel(ctx):
     if isGuild == True:
         data.guild_id.append(ctx.guild.id)
         data.channel_id.append(ctx.channel.id)
-        ctx.send("Channel Set Successfully, Enjoy")
+        await ctx.send("Channel Set Successfully, Enjoy")
     else:
-        ctx.send("Guild already registered")
+        await ctx.send("Guild already registered")
 
 @bot.event
 async def on_ready():
@@ -56,7 +56,7 @@ async def on_message(message):
             }
         }))
     else:
-        message.channel.send("Set Channels")
+        await message.channel.send("Set Channels")
     await bot.process_commands(message)
 
 bot.run("MTA2NTY1MDMzMDU5Mjg3ODcyNA.GTWMfV.zxlQ7zPKZCLnDF4qIsgzjsvF74jZJmq1bb3lkA")
