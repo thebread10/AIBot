@@ -67,6 +67,8 @@ async def on_message(message):
     if isPresent == True:
         channel = bot.get_channel(data['channel_id'][data['guild_id'].index(message.guild.id)])
         message_payload['inputs']['text'] = message.content
+        if len(message_payload['inputs']['past_user_inputs']) == 4:
+            message_payload['inputs']['past_user_inputs'].clear()
         message_payload['inputs']['past_user_inputs'].append(message.content)
         res = query(message_payload)
         message_payload['inputs']['generated_responses'].append(res['generated_text'])
