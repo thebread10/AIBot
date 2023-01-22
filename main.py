@@ -41,7 +41,7 @@ async def on_message(message):
     isPresent = False
     if message.author == bot.user:
         return
-    for i in data.guild_id:
+    for i in data['guild_id']:
         if data.guild_id[i] == message.guild.id:
             isPresent = True
             break
