@@ -69,7 +69,8 @@ async def on_message(message):
         message_payload['inputs']['text'] = message.content
         message_payload['inputs']['past_user_inputs'].append(message.content)
         res = query(message_payload)
-        await channel.send(res)
+        message_payload['inputs']['generated_responses'].append(res['generated_text'])
+        await channel.send(res['generated_text'])
     else:
         await message.channel.send("No channels set")
     await bot.process_commands(message)
