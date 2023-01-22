@@ -10,7 +10,7 @@ headers = {"Authorization": f"Bearer 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"}
 
 def query(payload):
     response = requests.request("POST", API_URL, headers=headers, json=payload)
-    return json.loads(response.content.decode("utf-8"))
+    return response.json()['generated_text']
 
 @bot.event
 async def on_ready():
