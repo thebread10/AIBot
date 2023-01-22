@@ -9,18 +9,25 @@ bot = commands.Bot(command_prefix = "L?", intents = discord.Intents.all())
 API_URL = f"https://api-inference.huggingface.co/models/{os.getenv('MODEL_ID')}"
 headers = {"Authorization": f"Bearer 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"}
 data = {
-    "guild_id": [],
-    "channel_id": []
+    guild_id: [],
+    channel_id: []
 }
 def query(payload):
     response = requests.request("POST", API_URL, headers=headers, json=payload)
     return response.json()['generated_text']
 
 @bot.command()
-async def set_channel(ctx): 
-    data.guild_id.append(ctx.guild.id)
-    data.channel_id.append(ctx.channel.id)
-    ctx.send("Channel Set Successfully")
+async def set_channel(ctx):
+    isGuild = True
+    for i in data.guild_id:
+        if data.guild_id == ctx.guild.id:
+            isGuild = False
+    if isGuild == True:
+        data.guild_id.append(ctx.guild.id)
+        data.channel_id.append(ctx.channel.id)
+        ctx.send("Channel Set Successfully, Enjoy")
+    else:
+        ctx.send("Guild already registered")
 
 @bot.event
 async def on_ready():
@@ -48,6 +55,8 @@ async def on_message(message):
 		"text": message.content
             }
         }))
+    else:
+        message.channel.send("Set Channels")
     await bot.process_commands(message)
 
 bot.run("MTA2NTY1MDMzMDU5Mjg3ODcyNA.GTWMfV.zxlQ7zPKZCLnDF4qIsgzjsvF74jZJmq1bb3lkA")
