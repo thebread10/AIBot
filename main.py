@@ -42,12 +42,12 @@ async def on_message(message):
     if message.author == bot.user:
         return
     for i in data['guild_id']:
-        if data.guild_id[i] == message.guild.id:
+        if data['guild_id'][i] == message.guild.id:
             isPresent = True
             break
 
     if isPresent == True:
-        channel = bot.get_channel(data.channel_id[data.guild_id.index(message.guild.id)])
+        channel = bot.get_channel(data['channel_id'][data['guild_id'].index(message.guild.id)])
         await channel.send(query({
 	    "inputs": {
 		"past_user_inputs": [],
