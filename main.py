@@ -16,7 +16,7 @@ def query(payload):
     response = requests.request("POST", API_URL, headers=headers, json=payload)
     return response.json()['generated_text']
 
-@bot.hybrid_command(name="set_channel")
+@bot.command()
 async def set_channel(ctx): 
     data.guild_id.append(ctx.guild.id)
     data.channel_id.append(ctx.channel.id)
