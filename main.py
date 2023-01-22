@@ -67,7 +67,9 @@ async def on_message(message):
     if isPresent == True:
         channel = bot.get_channel(data['channel_id'][data['guild_id'].index(message.guild.id)])
         message_payload['inputs']['text'] = message.content
+        message_payload['inputs']['past_user_inputs'].append(message.content)
         res = query(message_payload)
+        message_payload['inputs']['generated_responses'].append(res)
         await channel.send(res)
     else:
         await message.channel.send("No channels set")
