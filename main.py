@@ -9,8 +9,8 @@ bot = commands.Bot(command_prefix = "L?", intents = discord.Intents.all())
 API_URL = f"https://api-inference.huggingface.co/models/{os.getenv('MODEL_ID')}"
 headers = {"Authorization": f"Bearer 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"}
 data = {
-    guild_id: [],
-    channel_id: []
+    'guild_id': [],
+    'channel_id': []
 }
 def query(payload):
     response = requests.request("POST", API_URL, headers=headers, json=payload)
