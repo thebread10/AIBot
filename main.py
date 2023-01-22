@@ -1,7 +1,6 @@
 import discord
 import json
 import requests
-from transformers import AutoModelWithLMHead, AutoTokenizer
 from discord.ext import commands
 
 bot = commands.Bot(command_prefix = "-", intents = discord.Intents.all())
