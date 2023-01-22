@@ -17,10 +17,18 @@ def query(payload):
     return response.json()['generated_text']
 
 @bot.command()
+async def export_data(ctx):
+     print(data)
+
+@bot.command()
+async def import_data(ctx, json_data):
+     data = json_data
+
+@bot.command()
 async def set_channel(ctx):
     isGuild = True
     for i in data['guild_id']:
-        if data['guild_id'] == ctx.guild.id:
+        if i == ctx.guild.id:
             isGuild = False
     if isGuild == True:
         data['guild_id'].append(ctx.guild.id)
@@ -42,7 +50,7 @@ async def on_message(message):
     if message.author == bot.user:
         return
     for i in data['guild_id']:
-        if data['guild_id'][i] == message.guild.id:
+        if i == message.guild.id:
             isPresent = True
             break
 
