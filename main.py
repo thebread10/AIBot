@@ -6,8 +6,7 @@ from discord.ext import commands
 
 bot = commands.Bot(command_prefix = "L?", intents = discord.Intents.all())
 
-API_URL = f"https://api-inference.huggingface.co/models/{os.getenv('MODEL_ID')}"
-headers = {"Authorization": f"Bearer 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"}
+API_URL = f"https://celestebot-bitbot.koyeb.app/model/ai-gen/work"
 
 data = {
     'guild_id': [],
@@ -23,7 +22,7 @@ message_payload = {
 }
 
 def query(payload):
-    response = requests.request("POST", API_URL, headers=headers, json=payload)
+    response = requests.request("POST", API_URL, json=payload)
     return response.json()
 
 @bot.command()
