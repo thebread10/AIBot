@@ -18,7 +18,7 @@ message_payload = {
     "inputs": {
         "past_user_inputs": [],
         "generated_responses": [],
-        "text": message.content
+        "text": ""
     }
 }
 
