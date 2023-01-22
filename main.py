@@ -4,7 +4,7 @@ import requests
 import os
 from discord.ext import commands
 
-bot = commands.Bot(command_prefix = "-", intents = discord.Intents.all())
+bot = commands.Bot(command_prefix = "L?", intents = discord.Intents.all())
 
 API_URL = f"https://api-inference.huggingface.co/models/{os.getenv('MODEL_ID')}"
 headers = {"Authorization": f"Bearer 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"}
@@ -20,6 +20,7 @@ def query(payload):
 async def set_channel(ctx): 
     data.guild_id.append(ctx.guild.id)
     data.channel_id.append(ctx.channel.id)
+    ctx.send("Channel Set Successfully")
 
 @bot.event
 async def on_ready():
