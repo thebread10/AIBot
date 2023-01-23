@@ -6,7 +6,7 @@ from discord.ext import commands
 
 bot = commands.Bot(command_prefix = "L?", intents = discord.Intents.all())
 
-API_URL = f"https://celestebot-bitbot.koyeb.app/model/ai-gen/work"
+API_URL = f"https://aiserver.onrender.com/model/ai-gen/work"
 
 data = {
     'guild_id': [],
