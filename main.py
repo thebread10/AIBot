@@ -8,7 +8,16 @@ from chatterbot.trainers import ChatterBotCorpusTrainer
 
 bot = commands.Bot(command_prefix = "L?", intents = discord.Intents.all())
 
-chatbot = ChatBot('Clary')
+chatbot = ChatBot(
+    'Clary', 
+             storage_adapter='chatterbot.storage.SQLStorageAdapter',
+    logic_adapters=[
+        'chatterbot.logic.MathematicalEvaluation',
+        'chatterbot.logic.TimeLogicAdapter',
+        'chatterbot.logic.BestMatch'
+    ],
+    database_uri='sqlite:///database.db'
+)
 trainer = ChatterBotCorpusTrainer(chatbot)
 
 data = {
