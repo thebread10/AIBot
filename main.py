@@ -6,7 +6,13 @@ import openai
 from discord.ext import commands
 
 bot = commands.Bot(command_prefix = "L?", intents = discord.Intents.all())
-openai.api_key = "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"
+
+API_URL = "https://api-inference.huggingface.co/models/microsoft/DialoGPT-large"
+headers = {"Authorization": "Bearer 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"}
+
+def query(payload):
+	response = requests.post(API_URL, headers=headers, json=payload)
+	return response.json()["generated_text"]
 
 data = {
     'guild_id': [],
@@ -55,13 +61,14 @@ async def on_message(message):
             isPresent = True
             break
 
-    if isPresent == True: 
-        response = openai.Completion.create(
-            engine="text-davinci-002",
-            prompt=message.content
-        )
+    if isPresent == True:
         channel = bot.get_channel(data['channel_id'][data['guild_id'].index(message.guild.id)])   
-        await channel.send(response['choices'][0]['text'])
+        await channel.send(query({
+	"inputs": {
+		"past_user_inputs": [],
+		"generated_responses": [],
+		"text": message.content
+	}}))
     else:
         await message.channel.send("No channels set")
     await bot.process_commands(message)
