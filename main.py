@@ -12,8 +12,6 @@ chatbot = ChatBot(
     'Clary', 
              storage_adapter='chatterbot.storage.SQLStorageAdapter',
     logic_adapters=[
-        'chatterbot.logic.MathematicalEvaluation',
-        'chatterbot.logic.TimeLogicAdapter',
         'chatterbot.logic.BestMatch'
     ],
     database_uri='sqlite:///database.db'
