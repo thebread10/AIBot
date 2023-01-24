@@ -62,13 +62,13 @@ async def on_message(message):
 
     if isPresent == True:
         channel = bot.get_channel(data['channel_id'][data['guild_id'].index(message.guild.id)])
-        data = { "inputs": { "past_user_inputs": [], "generated_responses": [], "text": message.content } }
-        data["inputs"]["past_user_inputs"].append(message.content)
-        if len(data["inputs"]["past_user_inputs"]) == 3:
-            data["inputs"]["generated_responses"].append(res["generated_text"])["inputs"]["past_user_inputs"].clear()
-            data["inputs"]["generated_responses"].clear()
-        res = query(data)  
-        data["inputs"]["generated_responses"].append(res["generated_text"])
+        data_msg = { "inputs": { "past_user_inputs": [], "generated_responses": [], "text": message.content } }
+        data_msg["inputs"]["past_user_inputs"].append(message.content)
+        if len(data_msg["inputs"]["past_user_inputs"]) == 3:
+            data_msg["inputs"]["generated_responses"].append(res["generated_text"])["inputs"]["past_user_inputs"].clear()
+            data_msg["inputs"]["generated_responses"].clear()
+        res = query(data_msg)  
+        data_msg["inputs"]["generated_responses"].append(res["generated_text"])
         await channel.send(res["generated_text"])
     else:
         await message.channel.send("No channels set")
