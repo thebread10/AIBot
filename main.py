@@ -4,7 +4,7 @@ import requests
 import os
 from chatterbot import ChatBot
 from discord.ext import commands
-from chatterbot.trainers import ChatterBotCorpusTrainer
+from chatterbot.trainers import UbuntuCorpusTrainer
 
 bot = commands.Bot(command_prefix = "L?", intents = discord.Intents.all())
 
