@@ -57,7 +57,8 @@ async def on_message(message):
             isPresent = True
             break
 
-    if isPresent == True:    
+    if isPresent == True: 
+        channel = bot.get_channel(data['channel_id'][data['guild_id'].index(message.guild.id)])   
         await channel.send(chatbot.get_response(message.content))
     else:
         await message.channel.send("No channels set")
