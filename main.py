@@ -10,8 +10,6 @@ bot = commands.Bot(command_prefix = "L?", intents = discord.Intents.all())
 
 chatbot = ChatBot('LifeBot')
 trainer = ChatterBotCorpusTrainer(chatbot)
-trainer.train("chatterbot.corpus.english")
-trainer.train("chatterbot.corpus.english.greetings")
 trainer.train("chatterbot.corpus.english.conversations")
 
 data = {
