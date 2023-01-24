@@ -8,9 +8,8 @@ from chatterbot.trainers import ChatterBotCorpusTrainer
 
 bot = commands.Bot(command_prefix = "L?", intents = discord.Intents.all())
 
-chatbot = ChatBot('LifeBot')
+chatbot = ChatBot('Clary')
 trainer = ChatterBotCorpusTrainer(chatbot)
-trainer.train("chatterbot.corpus.english")
 
 data = {
     'guild_id': [],
@@ -24,6 +23,10 @@ async def export_data(ctx):
 @bot.command()
 async def import_data(ctx, json_data):
      data = json_data
+
+@bot.command()
+async def train_bot(ctx):
+    trainer.train("chatterbot.corpus.english")
 
 @bot.command()
 async def set_channel(ctx):
