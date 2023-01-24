@@ -26,7 +26,7 @@ async def import_data(ctx, json_data):
 
 @bot.command()
 async def train_bot(ctx):
-    trainer.train("chatterbot.corpus.english")
+    trainer.train("chatterbot.corpus.english.conversations")
 
 @bot.command()
 async def set_channel(ctx):
