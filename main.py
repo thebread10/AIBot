@@ -8,15 +8,8 @@ from chatterbot.trainers import ChatterBotCorpusTrainer
 
 bot = commands.Bot(command_prefix = "L?", intents = discord.Intents.all())
 
-chatbot = ChatBot(
-    'Clary', 
-             storage_adapter='chatterbot.storage.SQLStorageAdapter',
-    logic_adapters=[
-        'chatterbot.logic.BestMatch'
-    ],
-    database_uri='sqlite:///database.db'
-)
-trainer = ChatterBotCorpusTrainer(chatbot)
+chatbot = ChatBot('Clary')
+trainer = UbuntuCorpusTrainer(chatbot)
 
 data = {
     'guild_id': [],
@@ -33,7 +26,7 @@ async def import_data(ctx, json_data):
 
 @bot.command()
 async def train_bot(ctx):
-    trainer.train("chatterbot.corpus.english.conversations")
+    trainer.train()
 
 @bot.command()
 async def set_channel(ctx):
