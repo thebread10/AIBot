@@ -2,28 +2,22 @@ import discord
 import json
 import requests
 import os
+from chatterbot import ChatBot
 from discord.ext import commands
+from chatterbot.trainers import ChatterBotCorpusTrainer
 
 bot = commands.Bot(command_prefix = "L?", intents = discord.Intents.all())
 
-API_URL = f"http://localhost:8000/model/ai-gen/work"
+chatbot = ChatBot('LifeBot')
+trainer = ChatterBotCorpusTrainer(chatbot)
+trainer.train("chatterbot.corpus.english")
+trainer.train("chatterbot.corpus.english.greetings")
+trainer.train("chatterbot.corpus.english.conversations")
 
 data = {
     'guild_id': [],
     'channel_id': []
 }
-
-message_payload = {
-    "inputs": {
-        "past_user_inputs": [],
-        "generated_responses": [],
-        "text": ""
-    }
-}
-
-def query(payload):
-    response = requests.request("POST", API_URL, json=payload)
-    return response.json()
 
 @bot.command()
 async def export_data(ctx):
@@ -63,15 +57,12 @@ async def on_message(message):
             isPresent = True
             break
 
-    if isPresent == True:
-        channel = bot.get_channel(data['channel_id'][data['guild_id'].index(message.guild.id)])
-        message_payload['inputs']['text'] = message.content
-        message_payload['inputs']['past_user_inputs'].append(message.content)
-        res = query(message_payload)
-        message_payload['inputs']['generated_responses'].append(res)
-        await channel.send(res)
+    if isPresent == True:    
+        await channel.send(chatbot.get_response(message.content))
     else:
         await message.channel.send("No channels set")
     await bot.process_commands(message)
+
+
 
 bot.run("MTA2NTY1MDMzMDU5Mjg3ODcyNA.GTWMfV.zxlQ7zPKZCLnDF4qIsgzjsvF74jZJmq1bb3lkA")
