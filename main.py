@@ -2,14 +2,10 @@ import discord
 import json
 import requests
 import os
-from chatterbot import ChatBot
+import openai
 from discord.ext import commands
-from chatterbot.trainers import UbuntuCorpusTrainer
 
-bot = commands.Bot(command_prefix = "L?", intents = discord.Intents.all())
-
-chatbot = ChatBot('Clary')
-trainer = UbuntuCorpusTrainer(chatbot)
+openai.api_key = "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"
 
 data = {
     'guild_id': [],
@@ -59,8 +55,12 @@ async def on_message(message):
             break
 
     if isPresent == True: 
+        response = openai.Completion.create(
+            engine="text-davinci-002",
+            prompt=message.content
+        )
         channel = bot.get_channel(data['channel_id'][data['guild_id'].index(message.guild.id)])   
-        await channel.send(chatbot.get_response(message.content))
+        await channel.send(response['choices'][0]['text'])
     else:
         await message.channel.send("No channels set")
     await bot.process_commands(message)
