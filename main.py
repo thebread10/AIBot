@@ -12,7 +12,7 @@ headers = {"Authorization": "Bearer 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"}
 
 def query(payload):
 	response = requests.post(API_URL, headers=headers, json=payload)
-	return response.json()["generated_text"]
+	return response.json()
 
 data = {
     'guild_id': [],
@@ -62,13 +62,18 @@ async def on_message(message):
             break
 
     if isPresent == True:
-        channel = bot.get_channel(data['channel_id'][data['guild_id'].index(message.guild.id)])   
-        await channel.send(query({
-	"inputs": {
+        channel = bot.get_channel(data['channel_id'][data['guild_id'].index(message.guild.id)])
+	data = { "inputs": {
 		"past_user_inputs": [],
 		"generated_responses": [],
-		"text": message.content
-	}}))
+		"text": message.content } }
+        res["inputs"]["past_user_inputs"].append(message.content)
+        if len(res["inputs"]["past_user_inputs"]) == 3:
+            res["inputs"]["past_user_inputs"].clear()
+            res["inputs"]["generated_responses"].clear()
+        res = query(data)  
+        res["inputs"]["generated_responses"].append(res["generated_text"])
+        await channel.send(res["generated_text"])
     else:
         await message.channel.send("No channels set")
     await bot.process_commands(message)
