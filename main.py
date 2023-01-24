@@ -10,7 +10,7 @@ bot = commands.Bot(command_prefix = "L?", intents = discord.Intents.all())
 
 chatbot = ChatBot('LifeBot')
 trainer = ChatterBotCorpusTrainer(chatbot)
-trainer.train("chatterbot.corpus.english.conversations")
+trainer.train("chatterbot.corpus.english")
 
 data = {
     'guild_id': [],
