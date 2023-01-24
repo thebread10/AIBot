@@ -2,7 +2,6 @@ import discord
 import json
 import requests
 import os
-import openai
 from discord.ext import commands
 
 bot = commands.Bot(command_prefix = "L?", intents = discord.Intents.all())
@@ -67,12 +66,12 @@ async def on_message(message):
 		"past_user_inputs": [],
 		"generated_responses": [],
 		"text": message.content } }
-        res["inputs"]["past_user_inputs"].append(message.content)
-        if len(res["inputs"]["past_user_inputs"]) == 3:
-            res["inputs"]["past_user_inputs"].clear()
-            res["inputs"]["generated_responses"].clear()
+        data["inputs"]["past_user_inputs"].append(message.content)
+        if len(data["inputs"]["past_user_inputs"]) == 3:
+            data["inputs"]["generated_responses"].append(res["generated_text"])["inputs"]["past_user_inputs"].clear()
+            data["inputs"]["generated_responses"].clear()
         res = query(data)  
-        res["inputs"]["generated_responses"].append(res["generated_text"])
+        data["inputs"]["generated_responses"].append(res["generated_text"])
         await channel.send(res["generated_text"])
     else:
         await message.channel.send("No channels set")
