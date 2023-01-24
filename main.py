@@ -5,6 +5,7 @@ import os
 import openai
 from discord.ext import commands
 
+bot = commands.Bot(command_prefix = "L?", intents = discord.Intents.all())
 openai.api_key = "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"
 
 data = {
