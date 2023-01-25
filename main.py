@@ -70,7 +70,7 @@ async def on_message(message):
         channel = bot.get_channel(data['channel_id'][data['guild_id'].index(message.guild.id)])
         data_msg = { "inputs": { "past_user_inputs": past_msg, "generated_responses": responses, "text": message.content } }
         past_msg.append(message.content)
-        if len(past_msg) == 3:
+        if len(past_msg) == 5:
             past_msg.clear()
             responses.clear()
         res = query(data_msg)  
