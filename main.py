@@ -9,9 +9,9 @@ bot = commands.Bot(command_prefix = "L?", intents = discord.Intents.all())
 API_URL = "https://api-inference.huggingface.co/models/facebook/blenderbot-400M-distill"
 
 def query(payload):
-        headers = {"Authorization": f"Bearer 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"}
-	response = requests.post(API_URL, headers=headers, json=payload)
-	return response.json()
+    headers = {"Authorization": f"Bearer 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"}
+    response = requests.post(API_URL, headers=headers, json=payload)
+    return response.json()
 
 data = {
     'guild_id': [],
