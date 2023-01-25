@@ -65,7 +65,7 @@ async def on_message(message):
         if i == message.channel.id:
             isChannel = True
             break
-    if isPresent == True and isChannel = True:
+    if isPresent == True and isChannel == True:
         channel = bot.get_channel(data['channel_id'][data['guild_id'].index(message.guild.id)])
         data_msg = { "inputs": { "past_user_inputs": past_msg, "generated_responses": responses, "text": message.content } }
         past_msg.append(message.content)
