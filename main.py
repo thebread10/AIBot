@@ -7,9 +7,9 @@ from discord.ext import commands
 bot = commands.Bot(command_prefix = "L?", intents = discord.Intents.all())
 
 API_URL = "https://api-inference.huggingface.co/models/facebook/blenderbot-400M-distill"
-headers = {"Authorization": "Bearer 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"}
 
 def query(payload):
+        headers = {"Authorization": f"Bearer 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"}
 	response = requests.post(API_URL, headers=headers, json=payload)
 	return response.json()
 
@@ -24,14 +24,12 @@ responses = []
 @bot.command()
 async def export_data(ctx):
      print(data)
+     ctx.message.delete()
 
 @bot.command()
 async def import_data(ctx, json_data):
      data = json_data
-
-@bot.command()
-async def train_bot(ctx):
-    trainer.train()
+     ctx.message.delete()
 
 @bot.command()
 async def set_channel(ctx):
