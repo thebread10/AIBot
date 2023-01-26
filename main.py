@@ -11,7 +11,8 @@ API_URL = "https://8dbe55d1-e280-4579-9d33-277428e35ecd.deepnoteproject.com"
 def query(payload):
     headers = { "Content-type" : "application/json" }
     response = requests.post(API_URL, headers=headers, json=payload)
-    return response.json()
+    print(response)
+    return json.loads(response)
 
 data = {
     'guild_id': [],
