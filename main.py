@@ -6,7 +6,7 @@ from discord.ext import commands
 
 bot = commands.Bot(command_prefix = "L?", intents = discord.Intents.all())
 
-API_URL = "https://8dbe55d1-e280-4579-9d33-277428e35ecd.deepnoteproject.com"
+API_URL = "https://8dbe55d1-e280-4579-9d33-277428e35ecd.deepnoteproject.com/model/ai-gen/work"
 
 def query(payload):
     headers = { "Content-type" : "application/json" }
