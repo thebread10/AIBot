@@ -11,8 +11,8 @@ API_URL = "https://8dbe55d1-e280-4579-9d33-277428e35ecd.deepnoteproject.com/mode
 def query(payload):
     headers = { "Content-type" : "application/json" }
     response = requests.post(API_URL, headers=headers, json=payload)
-    print(response.json())
-    return json.loads(response.json())
+    print(response)
+    return response
 
 data = {
     'guild_id': [],
@@ -69,14 +69,8 @@ async def on_message(message):
 
     if isPresent == True and isChannel == True:
         channel = bot.get_channel(data['channel_id'][data['guild_id'].index(message.guild.id)])
-        data_msg = { "inputs": { "past_user_inputs": past_msg, "generated_responses": responses, "text": message.content } }
-        past_msg.append(message.content)
-        if len(past_msg) == 5:
-            past_msg.clear()
-            responses.clear()
-        res = query(data_msg)  
-        responses.append(res["generated_text"])
-        await channel.send(res["generated_text"])
+        data_msg = { "inputs": { "text": message.content } }
+        await channel.send(res)
     await bot.process_commands(message)
 
 
