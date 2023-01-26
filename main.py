@@ -19,9 +19,6 @@ data = {
     'channel_id': []
 }
 
-past_msg = []
-responses = []
-
 @bot.command()
 async def export_data(ctx):
      print(data)
@@ -70,7 +67,7 @@ async def on_message(message):
     if isPresent == True and isChannel == True:
         channel = bot.get_channel(data['channel_id'][data['guild_id'].index(message.guild.id)])
         data_msg = { "inputs": { "text": message.content } }
-        await channel.send(res)
+        await channel.send(query(data_msg))
     await bot.process_commands(message)
 
 
