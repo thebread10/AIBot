@@ -6,10 +6,10 @@ from discord.ext import commands
 
 bot = commands.Bot(command_prefix = "L?", intents = discord.Intents.all())
 
-API_URL = "https://api-inference.huggingface.co/models/facebook/blenderbot-400M-distill"
+API_URL = "https://8dbe55d1-e280-4579-9d33-277428e35ecd.deepnoteproject.com"
 
 def query(payload):
-    headers = {"Authorization": f"Bearer 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"}
+    headers = { "Content-type" : "application/json" }
     response = requests.post(API_URL, headers=headers, json=payload)
     return response.json()
 
