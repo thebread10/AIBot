@@ -54,14 +54,18 @@ async def on_ready():
 @bot.event
 async def on_message(message):
     isPresent = False
+    isChannel = False
     if message.author == bot.user:
         return
     for i in data['guild_id']:
         if i == message.guild.id:
             isPresent = True
             break
-
-    if isPresent == True:
+    for i in data['channel_id']:
+        if i == message.channel.id:
+            isChannel = True
+            break
+    if isPresent == True and isChannel == True:
         channel = bot.get_channel(data['channel_id'][data['guild_id'].index(message.guild.id)])
         data_msg = { "inputs": { "past_user_inputs": past_msg, "generated_responses": responses, "text": message.content } }
         past_msg.append(message.content)
