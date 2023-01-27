@@ -6,13 +6,15 @@ from discord.ext import commands
 
 bot = commands.Bot(command_prefix = "L?", intents = discord.Intents.all())
 
-API_URL = "https://8dbe55d1-e280-4579-9d33-277428e35ecd.deepnoteproject.com/model/ai-gen/work"
+API_URL = "https://api-inference.huggingface.co/models/facebook/blenderbot_small-90M"
 
 def query(payload):
-    headers = { "Content-type" : "application/json" }
+    headers = {"Authorization": "Bearer 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"}
     response = requests.post(API_URL, headers=headers, json=payload)
-    print(response.json()["data"])
-    return json.loads(response.json()["data"])
+    return response.json()
+
+past_msg = []
+responses = []
 
 data = {
     'guild_id': [],
@@ -52,22 +54,23 @@ async def on_ready():
 @bot.event
 async def on_message(message):
     isPresent = False
-    isChannel = False
     if message.author == bot.user:
         return
     for i in data['guild_id']:
         if i == message.guild.id:
             isPresent = True
             break
-    for i in data['channel_id']:
-        if i == message.channel.id:
-            isChannel = True
-            break
 
-    if isPresent == True and isChannel == True:
+    if isPresent == True:
         channel = bot.get_channel(data['channel_id'][data['guild_id'].index(message.guild.id)])
-        data_msg = { "inputs": { "text": message.content } }
-        await channel.send(query(data_msg))
+        data_msg = { "inputs": { "past_user_inputs": past_msg, "generated_responses": responses, "text": message.content } }
+        past_msg.append(message.content)
+        if len(past_msg) == 5:
+            past_msg.clear()
+            responses.clear()
+        res = query(data_msg)  
+        responses.append(res["generated_text"])
+        await channel.send(res["generated_text"])
     await bot.process_commands(message)
 
 
