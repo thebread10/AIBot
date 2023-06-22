@@ -4,12 +4,12 @@ import requests
 import os
 from discord.ext import commands
 
-bot = commands.Bot(command_prefix = "L?", intents = discord.Intents.all())
+bot = commands.Bot(command_prefix = "b?", intents = discord.Intents.all())
 
 API_URL = "https://api-inference.huggingface.co/models/facebook/blenderbot-400M-distill"
 
 def query(payload):
-    headers = {"Authorization": "Bearer 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"}
+    headers = {"Authorization": "Bearer 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"}
     response = requests.post(API_URL, headers=headers, json=payload)
     return response.json()
 
@@ -79,4 +79,4 @@ async def on_message(message):
 
 
 
-bot.run("MTA2NTY1MDMzMDU5Mjg3ODcyNA.GTWMfV.zxlQ7zPKZCLnDF4qIsgzjsvF74jZJmq1bb3lkA")
+bot.run("MTA2NTY1MDMzMDU5Mjg3ODcyNA.G17uaH.sDm1_88mBt0w_zLMfRjnx4KoBzGbUf3yhTIURY")
