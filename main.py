@@ -16,6 +16,19 @@ def query(payload):
 past_msg = []
 responses = []
 
+creator_array = [
+    'who created you?',
+    'Who created you?',
+    'who create you?',
+    'Who create you?',
+    'who created u?',
+    'who create u?',
+    'who your creator?',
+    'Who your creator?',
+    'Who ur creator?',
+    'who ur creator?'
+]
+
 data = {
     'guild_id': [],
     'channel_id': []
@@ -53,6 +66,10 @@ async def on_ready():
 
 @bot.event
 async def on_message(message):
+    for i in creator_array:
+        if message.content == i:
+            await channel.send('I was developed in BitBot Corp by user watashibaka.')
+            return
     isPresent = False
     isChannel = False
     if message.author == bot.user:
