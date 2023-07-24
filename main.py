@@ -71,6 +71,7 @@ async def on_message(message):
         if len(past_msg) == 4:
             past_msg.clear()
             responses.clear()
+        message.channel.typing() 
         data_msg = { "inputs": { "past_user_inputs": past_msg, "generated_responses": responses, "text": message.content } }
         res = query(data_msg)  
         responses.append(res["generated_text"])
