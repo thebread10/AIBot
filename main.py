@@ -26,7 +26,17 @@ creator_array = [
     'who your creator?',
     'Who your creator?',
     'Who ur creator?',
-    'who ur creator?'
+    'who ur creator?',
+    'who created you',
+    'Who created you',
+    'who create you',
+    'Who create you',
+    'who created u',
+    'who create u',
+    'who your creator',
+    'Who your creator',
+    'Who ur creator',
+    'who ur creator'
 ]
 
 data = {
