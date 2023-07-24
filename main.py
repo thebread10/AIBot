@@ -9,7 +9,7 @@ bot = commands.Bot(command_prefix = "b?", intents = discord.Intents.all())
 API_URL = "https://api-inference.huggingface.co/models/facebook/blenderbot-400M-distill"
 
 def query(payload):
-    headers = {"Authorization": "Bearer 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"}
+    headers = {"Authorization": "Bearer " + os.environ['HUGGING_FACE_TOKEN']}
     response = requests.post(API_URL, headers=headers, json=payload)
     return response.json()
 
@@ -79,4 +79,4 @@ async def on_message(message):
 
 
 
-bot.run("MTA2NTY1MDMzMDU5Mjg3ODcyNA.G17uaH.sDm1_88mBt0w_zLMfRjnx4KoBzGbUf3yhTIURY")
+bot.run(os.environ['DISCORD_TOKEN'])
