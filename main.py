@@ -2,6 +2,7 @@ import discord
 import json
 import requests
 import os
+import time
 from discord.ext import commands
 
 bot = commands.Bot(command_prefix = "b?", intents = discord.Intents.all())
@@ -100,6 +101,7 @@ async def on_message(message):
         if len(past_msg) == 4:
             past_msg.clear()
             responses.clear()
+        time.sleep(0.75)
         async with message.channel.typing():
             data_msg = { "inputs": { "past_user_inputs": past_msg, "generated_responses": responses, "text": message.content } }
             res = query(data_msg)  
