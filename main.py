@@ -2,7 +2,6 @@ import discord
 import json
 import requests
 import os
-import asyncio
 import time
 from discord.ext import commands
 
@@ -51,14 +50,6 @@ data = {
     'guild_id': [],
     'channel_id': []
 }
-
-def concatenate_message(msg, author):
-    while asyncio.sleep(5):
-        if prev_msg_user == author:
-            full_msg += msg
-            asyncio.sleep(5)
-        else:
-            return False
 
 @bot.command()
 async def export_data(ctx):
@@ -117,14 +108,10 @@ async def on_message(message):
         time.sleep(0.75)
         async with message.channel.typing():
             full_msg = message.content
-            while True:
-                concatenate_message(full_msg, message.author)
             data_msg = { "inputs": { "past_user_inputs": past_msg, "generated_responses": responses, "text": full_msg } }
             res = query(data_msg)  
             responses.append(res["generated_text"])
             await channel.send(res["generated_text"])
-            full_msg = ''
-            prev_msg_user = message.author
     await bot.process_commands(message)
 
 
