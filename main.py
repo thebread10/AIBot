@@ -2,6 +2,7 @@ import discord
 import json
 import requests
 import os
+import asyncio
 import time
 from discord.ext import commands
 
@@ -13,6 +14,9 @@ def query(payload):
     headers = {"Authorization": "Bearer " + os.environ['HUGGING_FACE_TOKEN']}
     response = requests.post(API_URL, headers=headers, json=payload)
     return response.json()
+
+full_msg = ''
+prev_msg_user = ''
 
 past_msg = []
 responses = []
@@ -34,6 +38,7 @@ creator_array = [
     'who create you',
     'Who create you',
     'who created u',
+    'Who created u',
     'who create u',
     'Who create u',
     'who your creator',
@@ -46,6 +51,14 @@ data = {
     'guild_id': [],
     'channel_id': []
 }
+
+def concatenate_message(msg, author):
+    while asyncio.sleep(5):
+        if prev_msg_user == author:
+            full_msg += msg
+            asyncio.sleep(5)
+        else:
+            return False
 
 @bot.command()
 async def export_data(ctx):
@@ -97,16 +110,21 @@ async def on_message(message):
             break
     if isPresent == True and isChannel == True:
         channel = bot.get_channel(data['channel_id'][data['guild_id'].index(message.guild.id)])
-        past_msg.append(message.content)
+        past_msg.append(full_msg.content)
         if len(past_msg) == 4:
             past_msg.clear()
             responses.clear()
         time.sleep(0.75)
         async with message.channel.typing():
-            data_msg = { "inputs": { "past_user_inputs": past_msg, "generated_responses": responses, "text": message.content } }
+            full_msg = message.content
+            while True:
+                concatenate_message(full_msg, message.author)
+            data_msg = { "inputs": { "past_user_inputs": past_msg, "generated_responses": responses, "text": full_msg } }
             res = query(data_msg)  
             responses.append(res["generated_text"])
             await channel.send(res["generated_text"])
+            full_msg = ''
+            prev_msg_user = message.author
     await bot.process_commands(message)
 
 
