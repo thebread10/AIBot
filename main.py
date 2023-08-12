@@ -101,14 +101,13 @@ async def on_message(message):
             break
     if isPresent == True and isChannel == True:
         channel = bot.get_channel(data['channel_id'][data['guild_id'].index(message.guild.id)])
-        past_msg.append(full_msg.content)
+        past_msg.append(message.content)
         if len(past_msg) == 4:
             past_msg.clear()
             responses.clear()
         time.sleep(0.75)
         async with message.channel.typing():
-            full_msg = message.content
-            data_msg = { "inputs": { "past_user_inputs": past_msg, "generated_responses": responses, "text": full_msg } }
+            data_msg = { "inputs": { "past_user_inputs": past_msg, "generated_responses": responses, "text": message.content } }
             res = query(data_msg)  
             responses.append(res["generated_text"])
             await channel.send(res["generated_text"])
