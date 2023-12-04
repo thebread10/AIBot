@@ -85,7 +85,7 @@ async def on_ready():
 async def on_message(message):
     for i in creator_array:
         if message.content == i:
-            await message.channel.send('I was developed in BitBot Corp by user watashibaka.')
+            await message.channel.send('I was developed by thebread10.')
             return
     isPresent = False
     isChannel = False
